@@ -10,8 +10,11 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v2.6
+-Added Traditional Chinese Localization
+-Fixed a bug with Russian Localization
 v2.5
--toc to 20400
+-toc to 30000
 -Fixed Sea dep
 v2.4
 -Removed SeaPrint usage
