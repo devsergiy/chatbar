@@ -2,6 +2,7 @@
 ..\FrameXML\UI.xsd">
 	
 	<Script file="localization.en.lua"/>
+	<Script file="localization.cn.lua"/>
 	<Script file="localization.de.lua"/>
 	<Script file="localization.fr.lua"/>
 	<Script file="localization.es.lua"/>
@@ -17,7 +18,7 @@
 			<Layer level="OVERLAY">
 				<FontString name="$parentText" inherits="GameFontNormalSmall" nonspacewrap="true" justifyH="CENTER">
 					<Size>
-						<AbsDimension x="12" y="12"/>
+						<AbsDimension x="20" y="12"/>
 					</Size>
 					<Anchors>
 						<Anchor point="BOTTOM" relativePoint="TOP">

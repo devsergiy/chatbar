@@ -61,3 +61,7 @@ CHATBAR_LFG					= "LookingForGroup";
 CHATBAR_LOCALDEFENSE		= "LocalDefense";
 CHATBAR_WORLDDEFENSE		= "WorldDefense";
 CHATBAR_GUILDRECRUITMENT	= "GuildRecruitment";
+
+CHATBAR_SKIN1	= "Solid";
+CHATBAR_SKIN2	= "Glass";
+CHATBAR_SKIN3	= "Squares";
