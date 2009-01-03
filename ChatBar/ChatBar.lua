@@ -10,6 +10,10 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v2.7
+-Added Simplified Chinese Localization (thanks IceChen)
+-Added new Squares skin (thanks Chianti/Кьянти)
+-Added new skin dropdown (Solid, Glass, Squares)
 v2.6
 -Added Traditional Chinese Localization
 -Fixed a bug with Russian Localization
@@ -88,6 +92,7 @@ ChatBar_HideSpecialChannels = true;
 ChatBar_LastTell = nil;
 ChatBar_StoredStickies = { };
 ChatBar_HiddenButtons = { };
+ChatBar_AltArtDirs = { "SkinSolid", "SkinGlass", "SkinSquares" };
 
 --------------------------------------------------
 -- Retell Hook
@@ -620,6 +625,8 @@ function ChatBar_LoadDropDownMenu()
 		ChatBar_CreateFrameMenu();
 	elseif (UIDROPDOWNMENU_MENU_VALUE == "HiddenButtonsMenu") then
 		ChatBar_CreateHiddenButtonsMenu();
+	elseif (UIDROPDOWNMENU_MENU_VALUE == "AltArtMenu") then
+		ChatBar_CreateAltArtMenu();
 	else
 		ChatBar_CreateButtonMenu();
 	end
@@ -655,10 +662,8 @@ function ChatBar_CreateFrameMenu()
 	--Alt Art
 	local info = {};
 	info.text = CHATBAR_MENU_MAIN_ALTART;
-	info.func = ChatBar_Toggle_AltArt;
-	if (ChatBar_AltArt) then
-		info.checked = 1;
-	end
+	info.hasArrow = 1;
+	info.value = "AltArtMenu";
 	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
 	
 	--Text On Buttons
@@ -773,6 +778,20 @@ function ChatBar_CreateHiddenButtonsMenu()
 		local ctype = k;
 		info.func = function() ChatBar_HiddenButtons[ctype]=nil ChatBarFrame.count = 0; end;
 		info.notCheckable = 1;
+		UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
+	end
+end
+
+function ChatBar_CreateAltArtMenu()
+	for k,v in pairs(ChatBar_AltArtDirs) do
+		--Show Button
+		local info = {};
+		info.text = _G["CHATBAR_SKIN"..k];
+		local skinIndex = k;
+		info.func = function() ChatBar_AltArt=skinIndex; ChatBar_UpdateArt(); end;
+		if (ChatBar_AltArt == k) then
+			info.checked = 1;
+		end
 		UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL);
 	end
 end
@@ -1033,12 +1052,10 @@ function ChatBar_Reset()
 end
 
 function ChatBar_UpdateArt()
-	local dir;
-	if (ChatBar_AltArt) then
-		dir = "Skin2";
-	else
-		dir = "Skin";
+	if type(ChatBar_AltArt) == "boolean" or ChatBar_AltArt == nil or not ChatBar_AltArtDirs[ChatBar_AltArt] then
+		ChatBar_AltArt = 1;
 	end
+	local dir = ChatBar_AltArtDirs[ChatBar_AltArt]
 	
 	for i=1, 20 do
 		getglobal("ChatBarFrameButton"..i.."UpTex_Spec"):SetTexture("Interface\\AddOns\\ChatBar\\"..dir.."\\ChanButton_Up_Spec");
@@ -1206,24 +1223,6 @@ function ChatBar_Toggle_ButtonText()
 		ChatBar_ButtonText = true;
 	end
 	ChatBar_UpdateButtonText();
-end
-
-function ChatBar_Toggle_TextChannelNumbers()
-	if (ChatBar_TextChannelNumbers) then
-		ChatBar_TextChannelNumbers = false;
-	else
-		ChatBar_TextChannelNumbers = true;
-	end
-	ChatBar_UpdateButtons();
-end
-
-function ChatBar_Toggle_AltArt()
-	if (ChatBar_AltArt) then
-		ChatBar_AltArt = false;
-	else
-		ChatBar_AltArt = true;
-	end
-	ChatBar_UpdateArt();
 end
 
 --------------------------------------------------
