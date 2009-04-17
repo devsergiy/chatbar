@@ -1,4 +1,4 @@
-## Interface: 30000
+## Interface: 30100
 ## Title: ChatBar
 ## Title-deDE: Chat-Leiste
 ## Notes: Button Bar for openning chat messages of each type.
