@@ -40,18 +40,10 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-			<OnLoad>
-				ChatBar_Button_OnLoad();
-			</OnLoad>
-	  		<OnEnter>
-	      		ChatBar_Button_OnEnter();
-	  		</OnEnter>
-	  		<OnLeave>
-	      		ChatBar_Button_OnLeave();
-	  		</OnLeave>
-			<OnClick>
-				ChatBar_Button_OnClick(arg1);
-			</OnClick>
+			<OnLoad function="ChatBar_Button_OnLoad"/>
+	  		<OnEnter function="ChatBar_Button_OnEnter"/>
+	  		<OnLeave function="ChatBar_Button_OnLeave"/>
+			<OnClick function="ChatBar_Button_OnClick"/>
 			<OnMouseDown>
 				getglobal(this:GetName().."UpTex_Spec"):Hide();
 				getglobal(this:GetName().."DownTex_Spec"):Show();
@@ -199,24 +191,12 @@
 		</Frames>
 		
 		<Scripts>
-			<OnLoad>
-				ChatBar_OnLoad();
-			</OnLoad>
-			<OnEvent>
-				ChatBar_OnEvent(event);
-			</OnEvent>
-			<OnUpdate>
-				ChatBar_OnUpdate(arg1);
-			</OnUpdate>
-			<OnMouseDown>
-				ChatBar_OnMouseDown(arg1);
-			</OnMouseDown>
-			<OnDragStart>
-				ChatBar_OnDragStart();
-			</OnDragStart>
-			<OnDragStop>
-				ChatBar_OnDragStop();
-			</OnDragStop>
+			<OnLoad function="ChatBar_OnLoad"/>
+			<OnEvent function="ChatBar_OnEvent"/>
+			<OnUpdate function="ChatBar_OnUpdate"/>
+			<OnMouseDown function="ChatBar_OnMouseDown"/>
+			<OnDragStart function="ChatBar_OnDragStart"/>
+			<OnDragStop function="ChatBar_OnDragStop"/>
 		</Scripts>
 	</Frame>
 	
@@ -232,9 +212,7 @@
 			</Anchor>
 		</Anchors>
 		<Scripts>
-			<OnLoad>
-				ChatBar_DropDownOnLoad();
-			</OnLoad>
+			<OnLoad function="ChatBar_DropDownOnLoad"/>
 		</Scripts>
 	</Frame>
 </Ui>

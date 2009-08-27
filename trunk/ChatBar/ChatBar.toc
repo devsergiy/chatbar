@@ -1,4 +1,4 @@
-## Interface: 30100
+## Interface: 30200
 ## Title: ChatBar
 ## Title-deDE: Chat-Leiste
 ## Notes: Button Bar for openning chat messages of each type.
@@ -7,9 +7,9 @@
 ## Notes-esES: Barra de botones para abrir los mensajes de chat de cada tipo.
 ## OptionalDeps: Chronos
 ## RequiredDeps:
-## SavedVariablesPerCharacter: ChatBar_VerticalDisplay, ChatBar_AlternateOrientation, ChatBar_HideSpecialChannels, ChatBar_TextOnButtonDisplay, ChatBar_ButtonFlashing, ChatBar_BarBorder, ChatBar_ButtonText, ChatBar_StoredStickies, ChatBar_HiddenButtons, ChatBar_TextChannelNumbers, ChatBar_HideAllButtons, ChatBar_AltArt
+## SavedVariablesPerCharacter: ChatBar_VerticalDisplay, ChatBar_AlternateOrientation, ChatBar_HideSpecialChannels, ChatBar_TextOnButtonDisplay, ChatBar_ButtonFlashing, ChatBar_BarBorder, ChatBar_ButtonText, ChatBar_StoredStickies, ChatBar_HiddenButtons, ChatBar_TextChannelNumbers, ChatBar_HideAllButtons, ChatBar_AltArt, ChatBar_ChannelBindings
 ## Author: AnduinLothar
-## Version: 2.7
+## Version: 2.8
 ## X-Date: $Date$
 ## X-Category: Chat
 ## X-Website: http://www.wowinterface.com/downloads/info4422-ChatBar.html
