@@ -10,6 +10,8 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v2.9
+-Fixed a channel bug
 v2.8
 -Added Chat Type Bindings
 -Added Channel Bindings by Number
@@ -120,32 +122,35 @@ function ChatBar_UseChatType(chatType, target)
 	local chatFrame = SELECTED_DOCK_FRAME or DEFAULT_CHAT_FRAME;
 	local editBox = chatFrame.editBox;
 	
+	local chatType, channelIndex = string.gmatch(chatType, "([^%d]*)([%d]*)$")();
+	
 	if chatType == "WHISPER" then
 		ChatFrame_ReplyTell(chatFrame);
 		if not editBox:IsVisible() or editBox:GetAttribute("chatType") ~= "WHISPER" then
-			ChatFrame_OpenChat("/w ", chatFrame);
+			ChatFrame_OpenChat(target and "/w "..target or "/w ", chatFrame);
 		end
-	elseif strsub(chatType, 1, 7) == "CHANNEL" then
-		if target and editBox:GetAttribute("channelTarget") == target then
-			ChatFrame_OpenChat("", chatFrame);
-		elseif target then
-			local channelNum, channelName = GetChannelName(target);
-			if channelName then
-				editBox:Show();
-				editBox:SetAttribute("chatType", "CHANNEL");
-				editBox:SetAttribute("channelTarget", channelNum)
-			else
-				return;
+		ChatEdit_UpdateHeader(editBox);
+		
+	elseif chatType == "CHANNEL" then
+		if target then
+			if type(target) == "string" then
+				target = GetChannelName(target);
 			end
+		elseif channelIndex then
+			target = tonumber(channelIndex);
+		else
+			return
 		end
-	elseif editBox:GetAttribute("chatType") == chatType then
-		ChatFrame_OpenChat("", chatFrame);
-	else
+		editBox:Show();
+		editBox:SetAttribute("chatType", "CHANNEL");
+		editBox:SetAttribute("channelTarget", target)
+		ChatEdit_UpdateHeader(editBox);
+		
+	elseif chatType then
 		editBox:Show();
 		editBox:SetAttribute("chatType", chatType);
+		ChatEdit_UpdateHeader(editBox);
 	end
-	
-	ChatEdit_UpdateHeader(editBox);
 end
 
 function ChatBar_StandardButtonClick(self, button, target)
