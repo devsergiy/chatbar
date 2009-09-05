@@ -10,6 +10,10 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v3.0
+-Added a fix for parsing the first character of a chinese channel (3 chars)
+-Fixed battleground chat button not showing up (thanks 狂飙)
+-Fixed Show Channel ID on Buttons not working
 v2.9
 -Fixed a channel bug
 v2.8
@@ -168,11 +172,7 @@ function ChatBar_ChannelShortText(index)
 		if ChatBar_TextChannelNumbers then
 			return channelNum;
 		else
-			if CHATBAR_DOUBLE_CHARS then
-				return strsub(channelName,1,2);
-			else
-				return strsub(channelName,1,1);
-			end
+			return strsub(channelName,1,CHATBAR_CHAR_LENGTH);
 		end
 	end
 end
@@ -275,7 +275,7 @@ ChatBar_ChatTypes = {
 		text = function() return CHAT_MSG_BATTLEGROUND; end,
 		click = ChatBar_StandardButtonClick,
 		show = function()
-			return (GetNumRaidMembers() > 0) and (GetBattlefieldInstanceRunTime() > 0) and (not ChatBar_HiddenButtons[CHAT_MSG_BATTLEGROUND]);
+			return (select(2, IsInInstance()) == "pvp") and (not ChatBar_HiddenButtons[CHAT_MSG_BATTLEGROUND]);
 		end
 	},
 	{
@@ -1148,11 +1148,7 @@ function ChatBar_Toggle_AlternateButtonOrientationSlide()
 end
 
 function ChatBar_Toggle_VerticalButtonOrientation()
-	if ChatBar_VerticalDisplay then
-		ChatBar_VerticalDisplay = false;
-	else
-		ChatBar_VerticalDisplay = true;
-	end
+	ChatBar_VerticalDisplay = not ChatBar_VerticalDisplay;
 	--ChatBar_UpdateOrientationPoint();
 	ChatBar_UpdateButtonOrientation();
 	ChatBar_UpdateButtons();
@@ -1198,58 +1194,34 @@ function ChatBar_UpdateOrientationPoint(expanded)
 end
 
 function ChatBar_Toggle_AlternateButtonOrientation()
-	if ChatBar_AlternateOrientation then
-		ChatBar_AlternateOrientation = false;
-	else
-		ChatBar_AlternateOrientation = true;
-	end
+	ChatBar_AlternateOrientation = not ChatBar_AlternateOrientation;
 	--ChatBar_UpdateOrientationPoint();
 	ChatBar_UpdateButtonOrientation();
 	ChatBar_UpdateButtons();
 end
 
 function ChatBar_Toggle_TextOrientation()
-	if ChatBar_TextOnButtonDisplay then
-		ChatBar_TextOnButtonDisplay = false;
-	else
-		ChatBar_TextOnButtonDisplay = true;
-	end
+	ChatBar_TextOnButtonDisplay = not ChatBar_TextOnButtonDisplay;
 	ChatBar_UpdateButtonOrientation();
 end
 
 function ChatBar_Toggle_ButtonFlashing()
-	if ChatBar_ButtonFlashing then
-		ChatBar_ButtonFlashing = false;
-	else
-		ChatBar_ButtonFlashing = true;
-	end
+	ChatBar_ButtonFlashing = not ChatBar_ButtonFlashing;
 	ChatBar_UpdateButtonFlashing();
 end
 
 function ChatBar_Toggle_BarBorder()
-	if ChatBar_BarBorder then
-		ChatBar_BarBorder = false;
-	else
-		ChatBar_BarBorder = true;
-	end
+	ChatBar_BarBorder = not ChatBar_BarBorder;
 	ChatBar_UpdateBarBorder();
 end
 
 function ChatBar_Toggle_HideSpecialChannels()
-	if ChatBar_HideSpecialChannels then
-		ChatBar_HideSpecialChannels = false;
-	else
-		ChatBar_HideSpecialChannels = true;
-	end
+	ChatBar_HideSpecialChannels = not ChatBar_HideSpecialChannels;
 	ChatBar_UpdateButtons();
 end
 
 function ChatBar_Toggle_HideAllButtons()
-	if ChatBar_HideAllButtons then
-		ChatBar_HideAllButtons = false;
-	else
-		ChatBar_HideAllButtons = true;
-	end
+	ChatBar_HideAllButtons = not ChatBar_HideAllButtons
 	ChatBar_UpdateButtons();
 end
 
@@ -1268,12 +1240,13 @@ function ChatBar_UpdateButtonText()
 end
 
 function ChatBar_Toggle_ButtonText()
-	if ChatBar_ButtonText then
-		ChatBar_ButtonText = false;
-	else
-		ChatBar_ButtonText = true;
-	end
+	ChatBar_ButtonText = not ChatBar_ButtonText;
 	ChatBar_UpdateButtonText();
+end
+
+function ChatBar_Toggle_TextChannelNumbers()
+	ChatBar_TextChannelNumbers = not ChatBar_TextChannelNumbers;
+	ChatBar_UpdateButtons();
 end
 
 function ChatBar_UpdateChannelBindings()
