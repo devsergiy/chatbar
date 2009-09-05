@@ -2,6 +2,8 @@
 -- localization.lua (English)
 --------------------------------------------------
 
+CHATBAR_CHAR_LENGTH = 1;
+
 CHATBAR_SAY_ABRV			= "S";
 CHATBAR_YELL_ABRV			= "Y";
 CHATBAR_PARTY_ABRV			= "P";

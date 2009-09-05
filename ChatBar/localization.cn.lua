@@ -1,10 +1,12 @@
-﻿--------------------------------------------------
+--------------------------------------------------
 -- localization.lua (Simplified Chinese)
 -- Translate by IceChen (逆袭的蓝 / 元素之力)
 -- Last Update : 2008/12/18 (Capable with 2.6.30000)
 --------------------------------------------------
 
 if ( GetLocale() == "zhCN" ) then
+
+CHATBAR_CHAR_LENGTH = 3;
 
 CHATBAR_SAY_ABRV			= "说";
 CHATBAR_YELL_ABRV			= "喊";
