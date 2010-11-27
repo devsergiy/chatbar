@@ -13,9 +13,12 @@ CHATBAR_BATTLEGROUND_ABRV	= "B";
 CHATBAR_GUILD_ABRV			= "G";
 CHATBAR_OFFICER_ABRV		= "O";
 CHATBAR_WHISPER_ABRV		= "W";
+CHATBAR_BN_WHISPER_ABRV		= "W";
+CHATBAR_BN_CONVERSATION_ABRV= "C";
 CHATBAR_EMOTE_ABRV			= "E";
 
 CHATBAR_MENU_MAIN_TITLE 			= "ChatBar Options";
+CHATBAR_MENU_MAIN_LARGE 			= "Large Buttons";
 CHATBAR_MENU_MAIN_VERTICAL 			= "Vertical Orientation";
 CHATBAR_MENU_MAIN_REVERSE 			= "Reverse Button Orientation";
 CHATBAR_MENU_MAIN_ALTART 			= "Use Alternate Artwork";
@@ -31,6 +34,7 @@ CHATBAR_MENU_MAIN_RESET				= "Reset Position";
 CHATBAR_MENU_MAIN_REORDER			= "Reorder Channels";
 CHATBAR_MENU_MAIN_REQCHRONOS		= " (Requires Chronos)";
 
+CHATBAR_MENU_CHANNEL_BLOCK			= "Block \"%s\" Channel";
 CHATBAR_MENU_CHANNEL_LEAVE			= "Leave";
 CHATBAR_MENU_CHANNEL_LIST			= "Print Channel User List";
 CHATBAR_MENU_HIDE_BUTTON			= "Hide \"%s\" Button";
@@ -44,6 +48,8 @@ CHATBAR_MENU_SHOW_BUTTON			= "Show \"%s\" Button";
 CHATBAR_REORDER_START 			= "Channels are being reordered...";
 CHATBAR_REORDER_END 			= "Channel reordering finished.";
 CHATBAR_REORDER_FLIGHT_FAIL 	= "You cannot reorder channels while taxiing.";
+CHATBAR_BLOCKED					= "Blocked \"%s\" channel."
+CHATBAR_UNBLOCKED				= "Unblocked \"%s\" channel."
 
 -- Capital Cities
 CHATBAR_SHATRATH		= "Shattrath City";
