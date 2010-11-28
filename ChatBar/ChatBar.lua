@@ -10,9 +10,16 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v3.3
+-Fixed nil error
+-Sped up the bar animation a bit
 v3.2
 -Removed 'this' usage
 -Buttons are now created on demand for less memory usage
+-Fixed to work with latest chat changes
+-Added BNet Whisper Button
+-Added BNet Conversation Button
+-toc to 40000
 v3.1 (yarko)
 -Added larger buttons option to options menu
 -Added channel blocking capability to channel buttons right-click menu
@@ -154,7 +161,7 @@ function ChatBar_UseChatType(chatType, target)
 			target = ChatBar_GetLastBNConversationOutTarget();
 		end
 		if target == "" then
-			target = GetFristBNConversation();
+			target = GetFristBNConversation() or "";
 		end
 		if target == "" then
 			--start new bn conversation
@@ -629,8 +636,8 @@ function ChatBar_OnEvent(self, event, ...)
 end
 
 --ConstantInitialVelocity = 10;
-ConstantVelocityModifier = 1.25;
-ConstantJerk = 3*ConstantVelocityModifier;
+ConstantVelocityModifier = 1.5;
+ConstantJerk = 3.5;
 ConstantSnapLimit = 2;
 
 function ChatBar_OnUpdate(self, elapsed)
