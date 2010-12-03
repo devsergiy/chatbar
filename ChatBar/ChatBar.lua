@@ -10,6 +10,8 @@ Graphics: Vynn, Zseton
 -Button Bar for openning chat messages of each type.
 
 Change Log:
+v3.4
+-Fixed 'show text' and 'large buttons' settings to correctly save between sessions
 v3.3
 -Fixed nil error
 -Sped up the bar animation a bit
