@@ -614,13 +614,17 @@ function ChatBar_OnEvent(self, event, ...)
 	elseif event == "CHAT_MSG_BN_CONVERSATION" then
 		ChatBar_SetLastBNConversationInTarget(chanNum);
 	elseif event == "VARIABLES_LOADED" then
+		
 		ChatBar_UpdateArt();
 		ChatBar_UpdateAllButtonOrientation();
-		ChatBar_UpdateButtonSizes();
 		ChatBar_UpdateButtonFlashing();
 		ChatBar_UpdateBarBorder();
-		ChatBar_UpdateButtonText();
 		ChatBar_UpdateChannelBindings();
+		
+		ChatBar_ForAllButtons(function(button) 
+			ChatBar_UpdateButtonText(button);
+			ChatBar_UpdateButtonSize(button);
+		end);
 		
 		--Update live Stickies
 		for chatType, enabled in pairs(ChatBar_StoredStickies) do
@@ -1277,6 +1281,9 @@ function ChatBar_CreateButton(buttonIndex)
 	
 	local artDir = ChatBar_AltArtDirs[ChatBar_AltArt];
 	ChatBar_UpdateButtonArt(buttonIndex, artDir);
+	
+	ChatBar_UpdateButtonText(button);
+	ChatBar_UpdateButtonSize(button);
 end
 
 -- Calls the func on each button, passing the button and the button index
@@ -1351,10 +1358,8 @@ function ChatBar_StartSlidingTo(size)
 	ChatBarFrame.isSliding = true;
 end
 
-function ChatBar_UpdateButtonSizes()
-	ChatBar_ForAllButtons(function(button) 
-		button:SetScale(ChatBar_ButtonScale) 
-	end);
+function ChatBar_UpdateButtonSize(button)
+	button:SetScale(ChatBar_ButtonScale) 
 end
 
 -- do not use on button #1
@@ -1448,7 +1453,6 @@ function ChatBar_UpdateButtonFlashing()
 		frame:UnregisterEvent("CHAT_MSG_BN_CONVERSATION");
 		frame:UnregisterEvent("CHAT_MSG_EMOTE");
 		frame:UnregisterEvent("CHAT_MSG_CHANNEL");
-
 	end
 end
 
@@ -1524,7 +1528,7 @@ end
 
 function ChatBar_Toggle_LargeButtons()
 	ChatBar_ButtonScale = (ChatBar_ButtonScale == 1 and CHAT_BAR_LARGEBUTTONSCALE) or 1;
-	ChatBar_UpdateButtonSizes();
+	ChatBar_ForAllButtons(ChatBar_UpdateButtonSize);
 	ChatBar_UpdateAllButtonOrientation();
 	ChatBar_UpdateButtons();
 end
@@ -1607,21 +1611,17 @@ function ChatBar_Toggle_HideAllButtons()
 	ChatBar_UpdateButtons();
 end
 
-function ChatBar_UpdateButtonText()
+function ChatBar_UpdateButtonText(button)
 	if ChatBar_ButtonText then
-		ChatBar_ForAllButtons(function(button) 
-			button.Text:Show();
-		end);
+		button.Text:Show();
 	else
-		ChatBar_ForAllButtons(function(button) 
-			button.Text:Hide();
-		end);
+		button.Text:Hide();
 	end
 end
 
 function ChatBar_Toggle_ButtonText()
 	ChatBar_ButtonText = not ChatBar_ButtonText;
-	ChatBar_UpdateButtonText();
+	ChatBar_ForAllButtons(ChatBar_UpdateButtonText);
 end
 
 function ChatBar_Toggle_TextChannelNumbers()

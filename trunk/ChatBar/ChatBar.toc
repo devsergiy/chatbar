@@ -11,8 +11,10 @@
 ## Author: AnduinLothar
 ## Version: 3.3
 ## X-Date: $Date$
+## X-Revision: $Rev: 5127 $
 ## X-Category: Chat
 ## X-Website: http://www.wowinterface.com/downloads/info4422-ChatBar.html
-## X-Localizations: enUS, deDE, frFR, esES
-## X-CompatibleLocales: enUS, enGB, deDE, frFR, esES
+## X-Email: karlkfi@yahoo.com
+## X-Localizations: enUS
+## X-CompatibleLocales: enUS, enGB
 ChatBar.xml
